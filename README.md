@@ -157,14 +157,13 @@ quintile = pd.read_csv("Quintile_return.csv", header = 0, index_col = 0)
 sorting.index = pd.DatetimeIndex(sorting.index)
 sorting.add(1).cumprod().plot(figsize = (16,9), title = 'Sorting Portfolios')
 ```
-<img src="https://user-images.githubusercontent.com/60916875/190038254-f3e40803-7fbe-4960-9910-4b1fceab7c40.png" width = "750">
+
 
 ```{python}
 quintile.index = pd.DatetimeIndex(quintile.index)
 quintile.add(1).cumprod().plot(figsize = (16,9), title = 'Quintile Portfolios')
 ```
-
-<img src="https://user-images.githubusercontent.com/60916875/190038325-0a7ff1d0-5ddb-47a1-8043-e8ac19c09bb9.png" width = "750">
+<img src="https://user-images.githubusercontent.com/60916875/190038254-f3e40803-7fbe-4960-9910-4b1fceab7c40.png" width = "750">
 
 
 ### Determine the risk premium of CSD
@@ -553,6 +552,7 @@ table5_4 = table5[11,3:6]
 rownames(table5_4) = c("AR(1)")
 knitr::kable(table5_4, "pipe", row.names = TRUE, col.names = c("mean", "alpha", "mean", "alpha"), caption = "CSD Measure")
 ```
+<img src="https://user-images.githubusercontent.com/60916875/190038325-0a7ff1d0-5ddb-47a1-8043-e8ac19c09bb9.png" width = "250">
 
 ### Price the Cross-Sectional Dispersion
 
