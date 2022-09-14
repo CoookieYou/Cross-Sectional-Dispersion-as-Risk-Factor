@@ -1,6 +1,6 @@
 
 # A Quantitative Research on Cross-Sectional Dispersion and Expected Returns
-- [Original Paper](https://www.researchgate.net/publication/322666461_Cross-sectional_dispersion_and_expected_returns)
+- Original Paper: Verousis, Thanos and Voukelatos, Nikolaos, Cross-Sectional Dispersion and Expected Returns (December 12, 2015). Available at SSRN:([https://www.researchgate.net/publication/322666461_Cross-sectional_dispersion_and_expected_returns](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2734192))
 
 - [Our Full Report](https://github.com/CoookieYou/Cross-Sectional-Dispersion-as-Risk-Factor/blob/main/csd_and_expected_returns.Rmd)
 
