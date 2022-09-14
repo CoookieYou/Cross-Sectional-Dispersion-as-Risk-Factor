@@ -1,7 +1,8 @@
 
 # A Quantitative Research on Cross-Sectional Dispersion and Expected Returns
-[Original Paper](https://www.researchgate.net/publication/322666461_Cross-sectional_dispersion_and_expected_returns)
-[Full Report](https://github.com/CoookieYou/Cross-Sectional-Dispersion-as-Risk-Factor/blob/main/csd_and_expected_returns.Rmd)
+- [Original Paper](https://www.researchgate.net/publication/322666461_Cross-sectional_dispersion_and_expected_returns)
+
+- [Our Full Report](https://github.com/CoookieYou/Cross-Sectional-Dispersion-as-Risk-Factor/blob/main/csd_and_expected_returns.Rmd)
 
 ## Introduction 
 
