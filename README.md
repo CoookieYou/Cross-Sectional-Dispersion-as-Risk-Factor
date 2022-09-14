@@ -769,11 +769,11 @@ Currently the team only analyzed the cross-sectional dispersion with Standard Po
 
 However, it certainly opens up new opportunities for the team to look at the calculation of the Cross-Sectional Dispersion factor calculation. From the original formula: 
 
-$$CSD_t= \frac{\sum_{i=1}^N |r_{i,t}-r_{mkt,t}|}{N-1}$$ 
+$$CSD_t= \frac{\sum_{i} |r_{i,t}-r_{mkt,t}|}{N-1}$$ 
 
 It is shown that the CSD is an equally weighted factor, but since we mentioned that eliminating delisted stocks brings a different CSD value, it is easy to imply that CSD could be expressed as a weighted factor in such a way that:
 
-$$CSD_t^{'}=\frac{\sum_{i=1}^N \lambda_{i,t}^* |r_{i,t}-r_{mkt,t}|}{N-1}$$ 
+$$CSD_t^{'}=\frac{\sum_{i} \lambda_{i,t}^* |r_{i,t}-r_{mkt,t}|}{N-1}$$ 
 
 Where i,t represents a weight, regarding different stocks. This weight can be informally calculated by the market cap proportion of the corresponding stock, or can be further optimized using a reinforcement learning approach such as Q-learning to determine the optimal value. This approach would make CSD a more refined factor that can be deliberately tuned. 
 
@@ -781,7 +781,7 @@ Where i,t represents a weight, regarding different stocks. This weight can be in
 
 Another improvement that can be examined is the correlation between a certain stock return and the market return. By eliminating the correlation of returns we might be able to calculate an unbiased CSD that represents the neutral fluctuation and volatility of the market. In this case we have
 
-$$CSD_t^{''}=\frac{\sum_{i=1}^N \lambda_{i,t}^* |\rho_{i,t}^* r_{i,t}-r_{mkt,t}|}{N-1}$$ 
+$$CSD_t^{''}=\frac{\sum_{i} \lambda_{i,t}^* |\rho_{i,t}^* r_{i,t}-r_{mkt,t}|}{N-1}$$ 
 
 Where i,t represents the correlation between stock i and market return, which can be calculated by a linear regression of stock returns.
 
