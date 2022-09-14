@@ -1,9 +1,10 @@
 
-# A QUANTITATIVE RESEARCH ON CROSS-SECTIONAL DISPERSION AND EXPECTED RETURNS
+# A Quantitative Research on Cross-Sectional Dispersion and Expected Returns
+[Original Paper](https://www.researchgate.net/publication/322666461_Cross-sectional_dispersion_and_expected_returns)
 
 ## Introduction 
 
-This paper is a replication of a research paper by Thanos Verousis and Nikolaos Voukelatos in 2016,  Cross-Sectional Dispersion and Expected Returns. The team followed the original paper’s concept with a wider timeline of market and stock data. The data analysis and calculation were executed in Python with Jupyter Notebook, along with packages including pandas, numpy, and statsmodels. The final result negligibly differs from the primitive paper, however the team determined that the factor is capable of explaining and predicting the market volatility and therefore, predicting the returns.
+This paper is a replication of a research paper by Thanos Verousis and Nikolaos Voukelatos in 2016,  *Cross-Sectional Dispersion and Expected Returns.* The team followed the original paper’s concept with a wider timeline of market and stock data. The data analysis and calculation were executed in Python with Jupyter Notebook, along with packages including pandas, numpy, and statsmodels. The final result negligibly differs from the primitive paper, however the team determined that the factor is capable of explaining and predicting the market volatility and therefore, predicting the returns.
 
 
 
@@ -36,7 +37,7 @@ In the paper, the authors argued that Cross-Sectional dispersion is a priced fac
   b. Regression on double sorted portfolios, maybe add Liquidity factor
   c. Also do b. To VIX, Stock Variance SVAR, index of macro uncertainty, cross-sectional means of residual volatility
 
-***Due to the lack of data for analysts’ prediction, we can not test the affect of FDISP factor in section 5.3
+***Due to the lack of data for analysts’ prediction, we can not test the affect of FDISP factor
 
 
 ## Data Source
@@ -44,7 +45,7 @@ In the paper, the authors argued that Cross-Sectional dispersion is a priced fac
 We provide the source of the data we used and the methods we used to manage them to provide direction for future research. The stock data were obtained from CRSP database. We obtained the Fama-French Three factors as well as Carhart momentum factors from the data library in Kenneth French's website, the VIX index from Bloomberg. The data of the index of the macroeconomic uncertainty was obtained from the website of Turan Bali. Here are the brief descriptive analysis about our main data.
 
 <img src="https://user-images.githubusercontent.com/60916875/190038006-9247577d-f607-41d5-8072-592dd0ebed75.png" width = "750">
-
+<img src="https://user-images.githubusercontent.com/60916875/190038235-cf7a4d36-167c-4cb8-88fa-41690a486a5b.png" width = "750">
 **Factors**
 
 Fama-French three factors combined with Carhart momentum factors were seems as one of the standard source of systematic risk premia in many of the academic researches.
@@ -156,11 +157,14 @@ quintile = pd.read_csv("Quintile_return.csv", header = 0, index_col = 0)
 sorting.index = pd.DatetimeIndex(sorting.index)
 sorting.add(1).cumprod().plot(figsize = (16,9), title = 'Sorting Portfolios')
 ```
+<img src="https://user-images.githubusercontent.com/60916875/190038254-f3e40803-7fbe-4960-9910-4b1fceab7c40.png" width = "750">
 
 ```{python}
 quintile.index = pd.DatetimeIndex(quintile.index)
 quintile.add(1).cumprod().plot(figsize = (16,9), title = 'Quintile Portfolios')
 ```
+
+<img src="https://user-images.githubusercontent.com/60916875/190038325-0a7ff1d0-5ddb-47a1-8043-e8ac19c09bb9.png" width = "750">
 
 
 ### Determine the risk premium of CSD
@@ -781,35 +785,18 @@ def two_pass_regression(reg_data, portfolios):
 
 From the return of the sorting portfolo, we can conclude that CSD has a slight negative trend. However, from the t-test statistics of long-short portfolios 1-5 and N-P, the correlation is in fact not negative, and not significant. The difference might came from the different usage of data. In our analysis we use only the stocks that still are listing today, which intrduced survivor ship bias, and affect the significance. What's more, due to the missing data of market value in the late 90s, some of the stocks with significant negative exposure to CSD might not participate in the regression (we follow the rules which only use those stocks that has more than 15 observation in that month)
 
-```{r, echo = FALSE}
-options(knitr.kable.NA = '')
-table1 = read.csv("Table1.csv")[,3:6]
-rownames(table1) = c("1","2","3","4","5","1-5","N-P")
-knitr::kable(table1, col.names = c('Mean', 'Std','Pre-formation beta', 'Post-formation beta'))
-#print(tabulate(pd.DataFrame(table1).values[:,:-1], headers = ['Portfolios', 'Mean', 'Std',\
-#'Pre-formation beta', 'Post-formation beta'], tablefmt="rst"))
-```
+<img src="https://user-images.githubusercontent.com/60916875/190038364-bf1d6ead-9b5e-491e-ba78-ef9026f39019.png" width = "750">
 
 
 We used the monthly returns of sorting portfolios 1-5 and N-P to do the regression on traditional Fama-French three factors $MKT$, $SMB$, $HML$ as well as Carhart's momentum factor $MOM$. From the regression results, we obtained a contradictory conclusion from Test1 which indicated that CSD has a significant negative risk-adjusted returns. The reason behind this might be that we use daily returns on Test1 but monthly returns on Test2, because monthly returns are more representative for factors like $SML$ and $HML$, which might reactly slowly to the market change, so we conclude that in long term investing, CSD can generate a significant risk-premium which are distinct from other established systematic risk premia.
 
-```{r}
-table2 = read.csv("Table2.csv")[,3:4]
-rownames(table2) = c("constant", "MKT", "SMB", "HML", "MOM", "Adj.R^2")
-knitr::kable(table2, "pipe", col.names = c('1-5', 'N-P'))
-```
+<img src="https://user-images.githubusercontent.com/60916875/190038384-a60e3b83-6e65-4e37-b14d-10efa29b9365.png" width="750">
 
 ### Test3. CSD can be price cross-sectionally
 
 In order to prove that CSD can be priced cross-sectionally. We use Fama-MacBeth two-pass regression to test the returns of double-sorted portfolios (based on $MKT$ and $FCSD$) on different measurement of cross-secional risk. From the table below we can see that all factors are not significant in the regression, indicating that CSD can be priced cross-sectionally, and is a distinct measurement of cross sectional risk.
 
-
-```{r, echo=FALSE}
-options(knitr.kable.NA = "")
-table6 = read.csv("Table6.csv")[,3:7]
-rownames(table6) = c("constant", "MKT", "SMB", "HML", "MOM", "FCSD", "FLIQ", "FVIX", "FSVAR", "FUNC", "FIDVOL", "Adj.R^2")
-knitr::kable(table6, col.names = c("regression-1", "regression-2", "regression-3", "regression-4", "regression-5"))
-```
+<img src="https://user-images.githubusercontent.com/60916875/190038401-93e207e9-cb72-459d-abcc-5ce460437e20.png" width = "750">
 
 ### Compare with Original Paper
 
