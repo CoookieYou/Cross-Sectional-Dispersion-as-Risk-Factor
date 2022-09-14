@@ -43,7 +43,7 @@ In the paper, the authors argued that Cross-Sectional dispersion is a priced fac
 
 We provide the source of the data we used and the methods we used to manage them to provide direction for future research. The stock data were obtained from CRSP database. We obtained the Fama-French Three factors as well as Carhart momentum factors from the data library in Kenneth French's website, the VIX index from Bloomberg. The data of the index of the macroeconomic uncertainty was obtained from the website of Turan Bali. Here are the brief descriptive analysis about our main data.
 
-[csd]<src="https://user-images.githubusercontent.com/60916875/190038006-9247577d-f607-41d5-8072-592dd0ebed75.png" width = "750">
+<img src="https://user-images.githubusercontent.com/60916875/190038006-9247577d-f607-41d5-8072-592dd0ebed75.png" width = "750">
 
 **Factors**
 
