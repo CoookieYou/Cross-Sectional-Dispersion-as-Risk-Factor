@@ -1,38 +1,23 @@
----
-title: "A QUANTITATIVE RESEARCH ON CROSS-SECTIONAL DISPERSION AND EXPECTED RETURNS"
-author: "Jinfan Hu , Yipu Jin, Zhengshun You, Yiming Zou"
-date: "3/12/2022"
-output:
-  pdf_document:
-    latex_engine: xelatex
-bibliography: bib.bib
----
 
+# A QUANTITATIVE RESEARCH ON CROSS-SECTIONAL DISPERSION AND EXPECTED RETURNS"
 
-
-# 1. Introduction 
+## Introduction 
 
 This paper is a replication of a research paper by Thanos Verousis and Nikolaos Voukelatos in 2016,  Cross-Sectional Dispersion and Expected Returns. The team followed the original paper’s concept with a wider timeline of market and stock data. The data analysis and calculation were executed in Python with Jupyter Notebook, along with packages including pandas, numpy, and statsmodels. The final result negligibly differs from the primitive paper, however the team determined that the factor is capable of explaining and predicting the market volatility and therefore, predicting the returns.
 
 
 
-# 2. Paper Summary
+## Paper Summary
 
 In this article, we review and attempt to reproduce the methods and results of “Cross-Sectional Dispersion and Expected Returns” by Thanos Verousis and Nikolaos Voukelatos[@Original], originally published in Quantitative Finance in January 2018. This paper discussed the relation between cross-sectional dispersion and stock returns, and found out that stocks with lower sensitivity to the cross-sectional dispersion generally have higher returns than stocks with high sensitivity to the cross-sectional dispersion. They asserted that the cross-sectional dispersion can be priced as a stated variable. They prove this by formulating that after accounting for its exposure to other systematic risk factors, the cross-sectional dispersion can still have a statistically significant risk premium. They also showed that the cross-sectional dispersion could be a good proxy for aggregated idiosyncratic risk. And after adjusting for a wild set of stock characteristics, market conditions and industry groupings, the results are still robust.
 
 The Cross-Sectional Dispersion (CSD) depicts the extent to how individual stocks’ returns are clustered or diverges from the market return in the cross-sectional level. Which provides a reasonable measure for the heterogeneity of how individual stocks perform according to their own characteristics[@Ang]. Since the stocks’ returns are driven by both systematic and idiosyncratic risks, the CSD could also be a close proxy to the aggregated idiosyncratic risks. Previous works had examined that dispersion has a strong negative relationship with market returns. Some of them also provided evidence for CSD’s connection with Momentum and Value factors. However, there has been very few discussions on how dispersion relating to individual stocks returns. The paper is dedicated to explore the relationship between Cross-Sectional Dispersion, Individual stocks returns, together with their idiosyncratic risks.
 
-They used a wide range of definitions to calculate CSD, and eventually proved that the results are indifference to the method they chose. Due to the non-stationarity, they chose the first order difference of CSD, to be the analyzing target. They illustrated that the average idiosyncratic risk of individual stocks can be decomposed into dispersion and market volatility, and since market risk has little power of predicting the future returns, the dispersion can be a potentially strong predictor. They ran a bivariate regression model on market risk factor and the dispersion factor, and obtained the individual stocks’ exposure on dispersion. By using the methods of [@Fama-French], they sorted the stocks and formed two portfolios 1-5 (long first quartile short fifth quantile) and N-P (long stocks with negative exposure short stocks with positive exposure). They showed that both portfolios have statistically significant positive returns, therefore proved that dispersion has a negative relationship with individual stocks.
-
-Although the portfolios’ returns are significant, much previous research had indicated the strong relation between dispersion and other systematic risk. In order to prove that the portfolios’ return do not came from holding other systematic risks, they regressed the portfolios’ returns on some of the most commonly used systematic risk factors, including the excess market return MKT, the two other [@Fama-French] factors SMB and HML, with the [@Carhart] momentum factor MOM. After accounting for these factors, the portfolios' return remained significant. After that, they also prove the predictive power of CSD is indifference to other individual characteristics of stocks[@Brennan]. After adjusting individual stocks’ return with systemic factors, they ran cross-sectional returns on some stocks’ idiosyncratic risk factors. Other than CSD, they also included the size (log market capitalization in millions), an idiosyncratic momentum factor (given by the past 6-month stock return), the standard deviation, skewness and kurtosis of stock returns over the past six months, the dispersion of analysts’ forecasts about the stock’s future earnings normalized by the mean forecast (similar to [@Diether]), a liquidity measure, the percentage of stock returns explained by systematic risk, as well as the co-skewness and idiosyncratic volatility of stock returns. The result remained significant after adjusting for the idiosyncratic risk factors. Then they constructed the doubled-sorted portfolios based on selected factors, although the portfolios’ returns seemed to be co-varied with some factors, it could not disavow the predictiveness of CSD. However, the later on tests showed that with longer testing-period, the portfolios’ returns became less significant. One credible explanation for that is with more data coming, the estimate of dispersion became less accurate.
-
-They finally proved that the CSD is a priced state variable. They employ the standard [@Fama-Macbeth] two-pass methodology to extract the risk premium of cross-sectional dispersion risks. After obtaining the time-series of double-sorted investment portfolios, they ran regression for the excess returns of each of the portfolios with a set of systematic risk factors, the result shows that the coefficient for CSD is significant at 5% level. After that, they incorporated more variables that may demonstrate dispersion of stocks returns. Those variables includes FVIX (based on monthly changes ∆VIX), an aggregate measure of dispersion of beliefs about the future earnings of stocks in the market (FDISP), macroeconomic uncertainty index UNC[@Bali]. After converting the time-series of cross-sectional means to a mimicking portfolio (FIDVOL), they include this aggregate idiosyncratic volatility factor in the augmented Regression. The results suggested that the factor is shown to associate with a negative risk premium, and the cross-sectional dispersion is a distinct risk-premium from premia associated with the established systematic risk factors.
-
 In the paper, the authors argued that Cross-Sectional dispersion is a priced factor, they proved that after adjusting for various systematic and idiosyncratic risk factors, the CSD remains predictive. Overall, they proved CSD is associated with negative risk-premium, stocks that are highly sensitive to dispersion will on average generate less returns that stocks that are less sensitive, and this phenomenon could be explained by the CSD’s approximation to the aggregated idiosyncratic risks for all stocks.
 
 
 
-# 3. Hypothesis Overview
+## Hypothesis Overview
 1. CSD has negative correlation to individual stocks’ return. Stocks with low sensitivity to CSD generally have lower returns than the ones with higher sensitivity.
   a. Mimicking portfolio for CSD monthly (1-5, N-P)
   b. Monthly rolling regression on MKT, CSD
@@ -54,65 +39,9 @@ In the paper, the authors argued that Cross-Sectional dispersion is a priced fac
 ***Due to the lack of data for analysts’ prediction, we can not test the affect of FDISP factor in section 5.3
 
 
+## Data Source
 
-# 4. Literature Review
-
-***Idiosyncratic risk matters!***
-
-Amit Goyal and Pedro Santa-Clara[@Goyal2003] found a significant positive relation between average stock variance and the return on the market, as opposed to systematic risk only, in one of their papers: Idiosyncratic Risk Matters! Their results are robust to small sample inference problems, in different sample periods, for alternative definitions of risk, for different portfolios, and persist even after controlling for business cycle variables known to predict the stock market. In fact, they show that it is the idiosyncratic component of total risk that drives the predictability of the market. The idiosyncratic component accounts for over 80 percent of total stock variance and over 70 percent of its variation through time. Moreover, when they regress market returns on pure idiosyncratic risk, they still retain significant predictive ability. Further, they find that the variance of the market by itself has no forecasting power for the market return. Rather, they believe that it is total risk that matters to investors and is therefore priced in market returns. The significance of idiosyncratic risk as a forecaster of market returns derives only from its importance as a large component of total risk and the precision with which it is measured. Similarly, the general insignificance of systematic risk in forecasting the market is due to its low weight on total risk and the large error in its measurement[@Angelidis]. They also show that idiosyncratic risk explains most of the variation of average stock risk through time and it is idiosyncratic risk that drives the forecastability of the stock market.
-
-***A model-free measure of aggregate idiosyncratic volatility and the prediction of market returns.***
-
-In addition, a recent literature has revealed that the stock return dispersion may possibly forecast market return.([@Garcia2014]) The paper formally focused on the cross-sectional variance of stock returns and discussed it as a consistent and asymptotically efficient estimator, especially when targeting aggregate idiosyncratic volatility. Two advantages were listed in detail: the cross-sectional variance of stock returns is a model-free factor, and it is observable at any frequency. These two advantages are valuable because most of the previous approaches for estimating idiosyncratic volatility have used models that exploit monthly measures, with a construction of a time series analysis of daily returns. However, with this newly developed method for volatility estimation, it is possible to measure the cross sectional volatility and use it as a strong predictor, especially when predicting and forecasting future returns on the aggregate stock market and most importantly, at a daily frequency. Garcia et al., demonstrated that a portfolio’s exposures to the aggregate idiosyncratic volatility risk predict the cross section of the expected returns, with the analysis of cross section of size and book-to-market portfolios. They verified that cross-sectional dispersion is a viable predicting factor over future market returns, when analyzed and examined at both the monthly and daily frequency. Nonetheless, Garcia et al., barely tested whether it is possible to price the 25 and 100 size/book-to-market portfolio, while the paper in this replication thoroughly inspected dispersion as a priced factor in the cross-section of market and stock returns, comprehensively. 
-
-***Does Idiosyncratic Risk Proxy for Risk Exposure?***
-
-Chen and Retkova proposed a new state variable that is measured as the cross-sectional dispersion of stock returns around the market return and reflects the aggregate level of idiosyncratic risk in the market. They hypothesized that it should be expected to be associated with a negative risk premium which means stocks are found to offer expected returns that vary according to their sensitivity to changes in dispersion. Furthermore, a zero-cost spread portfolio that is long (short) in stocks with low (high) dispersion betas produces a statistically and economically significant return. And they performed a set of robustness tests to avoid the bias of stocks’ idiosyncratic characteristics. More importantly, they showed that the reported dispersion premium is distinct from premia that have been previously found to be offered by other systematic factors which are related to uncertainty or heterogeneity, such as volatility, dispersion of analysts’ earnings forecasts, mean stock variance, macroeconomic uncertainty and the mean idiosyncratic volatility of stock returns.
-
-***Differences of Opinion and the Cross-Section of Stock Returns.***
-
-Diether and Scherbina prove that stocks with higher dispersion in analysts' earnings forecasts earn significantly lower future returns than other similar stocks. Further, they present evidence that standard multifactor risk-based explanations cannot account for this relation. They also shows consistency of the hypothesis as prices will reflect the optimistic view whenever investors with the lowest valuations do not trade. Further, they argue that any friction that prevents the revelation of negative opinions will produce the negative relation between dispersion and future returns. To this end, they demonstrate that the incentive structure of analysts could serve as another such friction. 
-
-***The Cross-Section Of Volatility And Expected Returns***
- 
-The paper examined the impact of innovations in aggregate volatility on the cross-sectional stock returns. As a result, they showed that the expected return is lower for individual stocks that are more sensitive to changes in market volatility. They also found that stocks with high idiosyncratic risk, compared to the Fama and French (1993) model, have extremely low expected returns. The paper proved this theory robust and cannot be explained by size, book-to-market, momentum, and liquidity factors. In the paper that we are replicating, they found that FCSD, the changes in CSD variable, has a relatively strong correlation with FVIX which is the monthly changes in VIX index. The finding is consistent with their negative dispersion risk premium theory.
- 
- 
-***Stock Market Dispersion, The Business Cycle And Expected Factor Returns***
- 
-The recent paper by Angelidis et al. provides evidence that the stock market return dispersion can be used as an economic state variable to predict changes in economic activity, returns of value, and momentum premia. In details, a high return dispersion is related to worse business conditions, higher value premium, smaller momentum premium, and lower market returns. They proved that return dispersion is a good predictor of future economy development as it is found that a high return dispersion is often followed by increased unemployment and greater likelihood of a recession. As a predictor of market returns and momentum premia, return dispersion is robust across periods, geographic locations, and measuring methods of the dispersion. The paper confirmed return dispersion is a better indicator than idiosyncratic stock volatility as it introduces less noise. The finding is consistence with our paper since there is less investing opportunities and worse stock performance in a bad business cycle.
-
-***Macroeconomic Uncertainty and Expected Stock Returns***
- 
-The paper constructed an ex-ante measure of economic uncertainty with cross-sectional dispersion in the macroeconomic fundamentals forecasts from professionals. They estimated the exposure of individual stocks to the economic uncertainty index, called by uncertainty beta, and discovered its correlation with future cross-sectional dispersion in stock returns. They found that stocks that are most sensitive to economic uncertainty yield lowest return, thus giving evidence to the negative link between the uncertainty beta and future stock returns. The effect is distinct from the negative market volatility risk premium and is robust across time periods and large and liquid stocks. The negative relation is confirmed in the paper that we aimed to replicate
-
-
-
-# 5. Replication
-
-## 5.1. Key Software Components
-
-The paper that we aim to replicate examined the cross-section of equity returns from the US stock market, during January 1996 to December 2012. The original data was extracted from the Center for Research in Security Prices (CRSP) database, containing daily closing bid and ask quotes and trading volumes. The original method used the CRSP value-weighted index as a proxy for the aggregate market when computing the cross-sectional dispersion:
-
-$$ CSD_t = \frac{\sum_{j=1}^{N}|r_{i,t}-r_{mkt,t}|}{N-1}$$
-In our replication, we obtained the stock market date from CRSP database and decided to use a time horizon from January 1990 to December 2019 for this replication, in purpose to further validate this factor. The data that the team acquired contains daily close, open, high, low price data. These data are carefully manipulated to construct a monthly return for every stock, with stock split and adjusting factor taken into account.
-
-An important difference from the original research paper is that our team decided to use only the surviving stock from 1990 to 2019, which could be biased since these surviving stocks may represent only the profiting side of the overall US stock market. In this case, we decided to use the Standard & Poor 500 Composite Index to represent the market return $r_{mkt,t}$ since the S & P 500 index is constructed with top trending companies, which usually outperform the market. The team decided that this composition of the CSD factor is valid and proceeded on to further data analysis.
-
-Plotting the daily frequency of the CSD time series from January 1990 to December 2019 in figure 1, we are able to calculate and conduct the mean and standard deviation, which are 1.33% and 0.54%. The original paper conducts a daily CSD mean and standard deviation of 1.16% and 0.44%, respectively. Results are relatively different because we used a different market return as benchmark, a different stock selection method, and a different timeline.
-
-```{python echo=FALSE}
-import pandas as pd
-import seaborn as sns
-sns.set_style("darkgrid")
-csd = pd.read_csv("CSD_series.csv", index_col = 0)
-csd.index = pd.DatetimeIndex(csd.index)
-csd.plot(figsize = (16,9), title = 'Time-Series of CSD')
-```
-
-### 5.1.1 Data Source
-
-We provide the source of the data we used and the methods we used to manage them to provide direction for future research. The stock data were obtained from CRSP database[@CRSP]. We obtained the Fama-French Three factors as well as Carhart momentum factors from the data library in Kenneth French's website[@French], the VIX index from Bloomberg. The data of the index of the macroeconomic uncertainty was obtained from the website of Turan Bali[@Turan]. Here are the brief descriptive analysis about our main data.
+We provide the source of the data we used and the methods we used to manage them to provide direction for future research. The stock data were obtained from CRSP database. We obtained the Fama-French Three factors as well as Carhart momentum factors from the data library in Kenneth French's website, the VIX index from Bloomberg. The data of the index of the macroeconomic uncertainty was obtained from the website of Turan Bali. Here are the brief descriptive analysis about our main data.
 
 **Factors**
 
@@ -138,7 +67,7 @@ This index is good measure for systematic risk in a macro level. It closely foll
 pd.read_csv("Economic Uncertainty Index.csv", header = 0, index_col = 0).plot(figsize = (16, 9))
 ```
 
-### 5.1.2. Data Management
+### Data Management
 
 The CRSP database we used contains all the stocks data since 1989 including fields like daily close price, daily trading volume, issue type of the asset etc. The original database has size of over 60 GB.In order to save our RAM and be able to extract required data efficiently, we read the original data by chunk using Python's pandas library, and stored the transformed data based on the fields in HDF format. Here are our main codes for storing the data.
 
@@ -185,11 +114,11 @@ for date in ['2010-2019', '2000-2009', '1990-1999']:
   time.sleep(10)
 ```
 
-### 5.1.3 Software Usage
+### Software Usage
 
 We conduct all our data processing task and statistical analysis in Python. We mainly used Pandas and Numpy modules for data management. The statistical analysis were conducted using statsmodels module. Our data and test results visualization were applied with Matplotlib and Seaborn modules in Python as well as knitr library in R.
 
-## 5.2. Replication of Key Analytical Techniques
+## Replication of Key Analytical Techniques
 
 ```{python include=FALSE}
 import warnings
@@ -209,7 +138,7 @@ from tabulate import tabulate
 ```
 
 
-### 5.2.1 Mimicing portfolio for CSD monthly
+### Mimicing portfolio for CSD monthly
 
 We conducted regression on stocks' return and $\Delta CSD$ as well as $MKT$ factor. Sort the $\beta \Delta CSD$ and form portfolios on different quintiles (1-5).
 
@@ -232,7 +161,7 @@ quintile.add(1).cumprod().plot(figsize = (16,9), title = 'Quintile Portfolios')
 ```
 
 
-### 5.2.2 Determine the risk premium of CSD
+### Determine the risk premium of CSD
 
 In order to show the relationship between dispersion loadings and mean returns is robust to other aggregate factors that have been commonly found to explain the cross-section of stock returns, such as market return MKT, the two additional [@Fama-French] factors SMB and HML, and the [@Carhart] momentum factor MOM. We first select entities that have survived from 1990 to 2019. The stock returns were adjusted by the adjusted factors in order to be used for time series analysis. We multiply each stocks’ daily return with their adjusted factor with the following code.
 
@@ -320,7 +249,7 @@ for i in range(1):
   res[name[i]] = result.params.to_list()
 ```
 
-### 5.2.3 Test Risk Adjusted Returns
+### Test Risk Adjusted Returns
 
 We run regression on the portfolio returns (1-5, N-P) with systematic factors, and use the significant of interseption terms to indentify the risk-adjusted returns of CSD.
 
@@ -360,7 +289,7 @@ return_N_P = return_N_P.sub(factors_monthly.RF, axis = 0)
 factors_monthly.rename(columns = {'Mom   ': 'Mom'}, inplace = True)
 ```
 
-### 5.2.4 Test the robustness of models
+### Test the robustness of models
 
 #### 1. formation window
 
@@ -619,7 +548,7 @@ rownames(table5_4) = c("AR(1)")
 knitr::kable(table5_4, "pipe", row.names = TRUE, col.names = c("mean", "alpha", "mean", "alpha"), caption = "CSD Measure")
 ```
 
-### 5.2.5 Price the Cross-Sectional Dispersion
+### Price the Cross-Sectional Dispersion
 
 We try to measure the price of CSD by showing that its price is immune of other cross-sectional risk measures[@Brennan]. Here we conduct the analysis of seven factors, $MKT$ market returns, $FVIX$ VIX volatilty index, $SVAR$ volatilty of returns of all stocks(arithmatic mean of squared returns), $UNC$ the index of uncertainty, $LIQ$ liquidity factor[@Pastor], and $IDVOL$ aggregated idiosyncratic risk, which were obtained as the residual of regression for each stocks' return on $MKT$, $SMB$, $HML$ and $MOM$ factors. Here for the convinence of calculation, we use the factor value as the mimic portfolio returns of that factor.
 
@@ -845,7 +774,7 @@ def two_pass_regression(reg_data, portfolios):
   return results
 ```
 
-## 5.3 Hypothesis Tests
+## Hypothesis Tests
 ### Test1. CSD has negative correlation with expected returns
 
 From the return of the sorting portfolo, we can conclude that CSD has a slight negative trend. However, from the t-test statistics of long-short portfolios 1-5 and N-P, the correlation is in fact not negative, and not significant. The difference might came from the different usage of data. In our analysis we use only the stocks that still are listing today, which intrduced survivor ship bias, and affect the significance. What's more, due to the missing data of market value in the late 90s, some of the stocks with significant negative exposure to CSD might not participate in the regression (we follow the rules which only use those stocks that has more than 15 observation in that month)
@@ -918,204 +847,46 @@ $$CSD_t^{''}=\frac{\sum_{i=1}^N \lambda_{i,t}^* |\rho_{i,t}^* r_{i,t}-r_{mkt,t}|
 Where i,t represents the correlation between stock i and market return, which can be calculated by a linear regression of stock returns.
 
 
-# 7 Conclusions
+## Conclusions
 
 In this paper, we replicated the research of Cross-Sectional Dispersion and Expected Returns by Thanos Verousis and Nikolaos Voukelatos in 2016. We used data from January 1996 to December 2012 to test the relationship between Cross-sectional Dispersion and the expected stock returns. First, we computed the $\Delta CSD$ factor, regression on all the stocks to obtain a mimicking portfolio. We then show that the mimicking portfolio had mild negative returns, and further proved that CSD has negative relationship with stocks' expected returns. In order to show that CSD is a new factor, we test the risk premium of CSD with the risk premia of some established systematic risk factors, the results indicated that CSD is a distinct risk factor. And it has similar performance under different market conditions, demonstrating the robustness of this factor. We finally use different measurement of cross-sectional risk to prove that CSD is a priced factor, and can be a distinct measures of aggregated idiosyncratic risk of individual stocks cross-sectionally. 
 
 We denote that the data we use is slightly different from the original paper, due to the missing data. So the results were less significant than the original paper. We suggest further analysis on more recent period. Because of the pandemic, the fundamental of market has experienced some changes, the factors that were once significant might generate less returns compared to the past. We also discovered that the alternative calculation methodology for CSD may generate different results, so further study on the robustness with calculation method is strongly suggested.
 
-# Appendix
+## Reference
 
-Main Python codes.
+Amit Goyal, Pedro Santa-Clara. 2003. “Idiosyncratic Risk Matters!” Journal of Finance 98: 975–1008.
 
-```{python}
-# Reference: https://www.statsmodels.org/dev/generated/statsmodels.regression.linear_model.OLS.html
-def regression_stocks(stock_prices, factors, beta):
-  '''
-  stock_prices: dataframe of stocks and factors returns
-  factors: a list of factors to do the regression
-  '''
-  betas = []
-  for stock in tqdm(stock_prices.stocks.columns, f"regression on {stock_prices.index[-1]}"):
-    X_Y = pd.concat([stock_prices.factors.loc[:, factors], stock_prices.stocks\
-    .loc[:, stock]],
-    axis = 1)
-    X_Y = X_Y.dropna()
-    if X_Y.shape[0]<15:
-      if beta == 'residual':
-        betas.append(pd.Series(np.nan, index = stock_prices.index))
-      else:
-        betas.append(None)
-      continue
-    X = X_Y.loc[:, factors]
-    Y = X_Y.loc[:, stock]
-    X = sm.add_constant(X)
-    model = sm.OLS(Y,X)
-    results = model.fit()
-    if beta == 'residual':
-      betas.append(Y.sub(results.predict(X)))
-    else:
-      betas.append(results.params[beta])
-  if beta == 'residual':
-    return_df = pd.concat(betas, axis =1)
-    return_df.columns = stock_prices.stocks.columns
-    return return_df
-  else:
-    return pd.Series(betas, index = stock_prices.stocks.columns, name =\
-  stock_prices.index[-1])
+Ang, Hodrick, A., and X. Zhang. 2006. “The Cross-Section Ofvolatility and Expected Returns.” Journal of Finance 61: 259–99.
 
+Angelidis, Sakkas, T., and N. Tessaromatis. 2015. “Stock Market Dispersion, the Business Cycle and Expected Factor Returns.” Journal of Banking and Finance 59: 265–79.
 
-def get_weights(beta_df, ref_index, mv_df):
-  ### Align the Index
-  new_index = sorted(list(set(beta_df.index).intersection(set(pd.DatetimeIndex
-  (ref_index.astype(str))))))
-  ### Quantile1-Quantile5
-  No5=(beta_df.sub(beta_df.quantile(q=0.8, axis=1), axis = 0)>=0).loc[new_index]\
-  .mul(mv_df.loc[new_index])
-  No5 = No5.fillna(0)
-  No5 = No5.div(No5.sum(axis = 1), axis = 0)
+Bali, Brown, T., and Y. Tang. 2015. “Macroeconomic Uncertainty and Expected Stock Returns.”
 
-  No4=((beta_df.sub(beta_df.quantile(q=0.8, axis=1), axis = 0)<=0) & \
-  (beta_df.sub(beta_df.quantile(q=0.6, axis=1), axis = 0)>0)).loc[new_index]\
-  .mul(mv_df.loc[new_index])
-  No4 = No4.fillna(0)
-  No4 = No4.div(No4.sum(axis = 1), axis = 0)
+Bali, Turan. n.d. https://sites.google.com/a/georgetown.edu/turan-bali/data-working-papers.
 
-  No3=((beta_df.sub(beta_df.quantile(q=0.6, axis=1), axis = 0)<=0) & \
-  (beta_df.sub(beta_df.quantile(q=0.4, axis=1), axis = 0)>0)).loc[new_index]\
-  .mul(mv_df.loc[new_index])
-  No3 = No3.fillna(0)
-  No3 = No3.div(No3.sum(axis = 1), axis = 0)
+Brennan, Chordia, M., and A. Subrahmanyam. 1998. “Alternative Factor Specifications, Security Characteristics, and the Cross-Section of Expected Returns.” The Journal of Financial Economic 49 (4): 345–73.
 
-  No2=((beta_df.sub(beta_df.quantile(q=0.4, axis=1), axis = 0)<=0) & \
-  (beta_df.sub(beta_df.quantile(q=0.2, axis=1), axis = 0)>0)).loc[new_index]\
-  .mul(mv_df.loc[new_index])
-  No2 = No2.fillna(0)
-  No2 = No2.div(No2.sum(axis = 1), axis = 0)
+Carhart, M. 1997. “On Persistence in Mutual Fund Performance.” Journal of Finance 52: 57–82.
 
-  No1=(beta_df.sub(beta_df.quantile(q=0.2, axis=1), axis = 0)<=0).loc[new_index]\
-  .mul(mv_df.loc[new_index])
-  No1 = No1.fillna(0)
-  No1 = No1.div(No1.sum(axis = 1), axis = 0)
-  ### Negative-Positive
-  Neg=(beta_df < 0).loc[new_index].mul(mv_df.loc[new_index])
-  Neg = Neg.fillna(0)
-  Neg = Neg.div(Neg.sum(axis = 1), axis = 0)
-  Pos=(beta_df > 0).loc[new_index].mul(mv_df.loc[new_index])
-  Pos = Pos.fillna(0)
-  Pos = Pos.div(Pos.sum(axis = 1), axis = 0)
+Chen, Z., and R. Petkova. 2012. “Does Idiosyncratic Risk Proxy for Risk Exposure?” Review of Financial Studies 25: 2745–87.
 
-  return No1, No2, No3, No4, No5, Neg, Pos, new_index
-```
+CRSP. n.d. https://www.crsp.org/.
 
-```{python, eval = FALSE}
-### close price data
-close_df = pd.concat([pd.read_hdf("/content/drive/My Drive/FIN554/ClosePrice.h5",\
-key = '1990-1999').prccd,\
-                      pd.read_hdf("/content/drive/My Drive/FIN554/ClosePrice.h5",\
-                      key = '2000-2009').prccd,\
-                      pd.read_hdf("/content/drive/My Drive/FIN554/ClosePrice.h5",\
-                      key = '2010-2019').prccd],\
-                      axis = 0, join = 'inner')
-### select data after 1995-12-31
-close_df = close_df.loc[close_df.index > 19951231 ]
-### delete the date and stocks that are all empty
-close_df.dropna(how = 'all', inplace = True)
-close_df.dropna(how = 'all', axis = 1, inplace = True)
+Diether, C., K. Malloy, and A. Scherbina. 2002. “Differences of Opinion and the Cross-Section of Stock Returns.” Journal of Finance 57: 2113–41.
 
-### adjust factors data
-adjf_df = pd.concat([pd.read_hdf("/content/drive/My Drive/FIN554/AdjustFactor.h5",\
-key = '1990-1999').ajexdi,\
-                     pd.read_hdf("/content/drive/My Drive/FIN554/AdjustFactor.h5",\
-                     key = '2000-2009').ajexdi,\
-                     pd.read_hdf("/content/drive/My Drive/FIN554/AdjustFactor.h5",\
-                     key = '2010-2019').ajexdi],\
-                     axis = 0, join = 'inner')
-### select data after 1995-12-31
-adjf_df = adjf_df.align(close_df, join = 'right')[0]
+Fama, E., and K. French. 2002. “Differences of Opinion and the Cross-Section of Stock Returns.” Journal of Finance 33: 3–56.
 
-### trfd factors data
-trfd_df = pd.concat([pd.read_hdf("/content/drive/My Drive/FIN554/TrfdFactor.h5",\
-key = '1990-1999').trfd,\
-                     pd.read_hdf("/content/drive/My Drive/FIN554/TrfdFactor.h5",\
-                     key = '2000-2009').trfd,\
-                     pd.read_hdf("/content/drive/My Drive/FIN554/TrfdFactor.h5",\
-                     key = '2010-2019').trfd],\
-                     axis = 0, join = 'inner')
-### select data after 1995-12-31
-trfd_df = trfd_df.align(adjf_df, join = 'right')[0]
+Fama, E., and J. Macbeth. 1973. “Risk, Return, and Equilibrium: Empiricaltests.” Journal of Political Economy 71: 607–36.
 
-### calculate the adjusted close returns
-adj_price = close_df.div(adjf_df)
-adj_return = adj_price.mul(trfd_df).pct_change()
-### replace infinity with previous return
-adj_return.replace(np.inf, np.nan, inplace = True)
-adj_return.pad(inplace = True)
+French, Kenneth. n.d. https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html.
 
-### Daily MKT and RF factor data
-mkt_rf_daily = pd.read_csv("/content/drive/My Drive/FIN554/Factors_daily.csv", \
-header = 0, index_col = 0).loc[:, ["Mkt-RF", "RF"]].div(100)
+Garcia, Mantilla-Garcia, R., and L. Martellini. 2014. “A Model-Free Measure of Aggregate Idiosyncratic Volatility and the Prediction of Market Returns.” Journal of Financial and Quantitative Analysis. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1973471.
 
-### Calculate the CSD Factors
-num_stocks = adj_return.shape[1]
-### calculate the first order difference of CSD as our main variable
-csd = adj_return.sub(mkt_rf_daily.loc[adj_return.index, "Mkt-RF"], axis= 0).abs()\
-.sum(axis = 1).div(num_stocks-1).diff()
-mkt_rf_daily['CSD'] = csd
+Harvey, C., and A Siddique. 2000. “Conditional Skewness in Asset Pricing Tests.” Journal of Finance 55(4): 1263–95.
+28
 
-### calculate the access returns
-return_daily = pd.concat([adj_return, mkt_rf_daily], axis = 1, join = 'inner', \
-keys = ['stocks', 'factors'])
-return_daily.stocks = return_daily.stocks.sub(return_daily.factors.RF, axis = 0)
-```
+Pastor, L., and R. Stambaugh. 2003. “Liquidity Risk and Expected Stock Returns.” Liquidity Risk and Expected Stock Returns 111: 642–85.
 
-```{python, eval = FALSE}
-### Market Share as Portfolio Weight
-# *** Before 1998-04-01 only 3 or 4 not N/A per month ***
-### Market Share data
-mv_df = pd.concat([pd.read_hdf("/content/drive/My Drive/FIN554/ShareOutstanding.h5",\
-key = '1990-1999').cshoc,\
-                      pd.read_hdf("/content/drive/My Drive/FIN554/ShareOutstanding.h5",\
-                      key = '2000-2009').cshoc,\
-                      pd.read_hdf("/content/drive/My Drive/FIN554/ShareOutstanding.h5",\
-                      key = '2010-2019').cshoc],\
-                      axis = 0, join = 'inner')
-### select data after 1995-12-31
-mv_df = mv_df.loc[mv_df.index > 19951231 ]
+Verousis, Thanos, and Nikolaos Voukelatos. 2015. “Cross-Sectional Dispersion and Expected Returns.”
 
-mv_df = mv_df.align(return_daily.stocks, join = 'right')[0].mul(close_df)
-mv_df.index = pd.DatetimeIndex(mv_df.index.astype(str))
-```
-
-```{python, eval = FALSE}
-### group by month to generate regression data
-regression_data = return_daily.copy(deep = True)
-regression_data.index = pd.DatetimeIndex(return_daily.index.astype(str)).strftime("%Y-%m")
-```
-
-```{python, eval = FALSE}
-# Multithreading to speed up
-# https://stackoverflow.com/questions/8533318/multiprocessing-pool-
-# when-to-use-apply-apply-async-or-map
-
-### store the result in dictionary
-def log_result(result):
-    beta_df.append(result)
-
-pool = Pool(os.cpu_count())
-
-# regression_data.fillna(method = 'ffill', inplace = True)
-beta_df = []
-
-### monthly regression
-for idx, grouped_df in regression_data.groupby(level = 0):
-  pool.apply_async(regression_stocks, args=(grouped_df,['Mkt-RF', 'CSD'], 'CSD'),\
-  callback = log_result)
-
-pool.close()
-pool.join()
-
-beta_df = pd.concat(beta_df, axis=1).T
-```
-
-# Reference
