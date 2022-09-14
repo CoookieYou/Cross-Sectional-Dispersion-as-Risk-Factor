@@ -731,7 +731,7 @@ def two_pass_regression(reg_data, portfolios):
 ```
 
 ## Hypothesis Tests
-### Test1. CSD has negative correlation with expected returns
+### Test. CSD has negative correlation with expected returns
 
 From the return of the sorting portfolo, we can conclude that CSD has a slight negative trend. However, from the t-test statistics of long-short portfolios 1-5 and N-P, the correlation is in fact not negative, and not significant. The difference might came from the different usage of data. In our analysis we use only the stocks that still are listing today, which intrduced survivor ship bias, and affect the significance. What's more, due to the missing data of market value in the late 90s, some of the stocks with significant negative exposure to CSD might not participate in the regression (we follow the rules which only use those stocks that has more than 15 observation in that month)
 
@@ -740,9 +740,9 @@ From the return of the sorting portfolo, we can conclude that CSD has a slight n
 
 We used the monthly returns of sorting portfolios 1-5 and N-P to do the regression on traditional Fama-French three factors $MKT$, $SMB$, $HML$ as well as Carhart's momentum factor $MOM$. From the regression results, we obtained a contradictory conclusion from Test1 which indicated that CSD has a significant negative risk-adjusted returns. The reason behind this might be that we use daily returns on Test1 but monthly returns on Test2, because monthly returns are more representative for factors like $SML$ and $HML$, which might reactly slowly to the market change, so we conclude that in long term investing, CSD can generate a significant risk-premium which are distinct from other established systematic risk premia.
 
-<img src="https://user-images.githubusercontent.com/60916875/190038384-a60e3b83-6e65-4e37-b14d-10efa29b9365.png" width="500">
+<img src="https://user-images.githubusercontent.com/60916875/190038384-a60e3b83-6e65-4e37-b14d-10efa29b9365.png" width="350">
 
-### Test3. CSD can be price cross-sectionally
+### Test. CSD can be price cross-sectionally
 
 In order to prove that CSD can be priced cross-sectionally. We use Fama-MacBeth two-pass regression to test the returns of double-sorted portfolios (based on $MKT$ and $FCSD$) on different measurement of cross-secional risk. From the table below we can see that all factors are not significant in the regression, indicating that CSD can be priced cross-sectionally, and is a distinct measurement of cross sectional risk.
 
